@@ -1,3 +1,19 @@
+import RPi.GPIO as GPIO
+
+# import the library
+from RpiMotorLib import RpiMotorLib
+    
+#define GPIO pins
+GPIO_pins = (21, 22, 27) # Microstep Resolution MS1-MS3 -> GPIO Pin
+direction= 20       # Direction -> GPIO Pin
+step = 21      # Step -> GPIO Pin
+
+# Declare a instance of class pass GPIO pins numbers and the motor type
+mymotortest = RpiMotorLib.A4988Nema(direction, step, GPIO_pins, "DRV8825")
+
+
+# call the function, pass the arguments
+mymotortest.motor_go(False, "Full" , 100, .01, False, .05)
 from rpi_python_drv8825.stepper import StepperMotor
 from time import sleep
 # GPIO setup
@@ -6,8 +22,8 @@ step_pin = 18
 dir_pin = 24
 mode_pins = (21, 22, 27)
 # Stepper motor setup
-step_type = 'full'
-fullstep_delay = 2
+step_type = '1/64'
+fullstep_delay = .005
 
 
 # create object
