@@ -6,7 +6,7 @@ step_pin = 18
 dir_pin = 24
 mode_pins = (21, 22, 27)
 # Stepper motor setup
-step_type = '1/32'
+step_type = 'full'
 fullstep_delay = 2
 
 
