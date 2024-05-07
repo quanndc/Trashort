@@ -58,7 +58,7 @@ while(True):
     # capture image
     if cv2.waitKey(1) & 0xFF == ord('c'):
         cv2.imwrite('/home/pi/Pictures/image.jpg', frame)
-        result = model.predict_from_file('image.jpg')
+        result = model.predict_from_file('/home/pi/Pictures/image.jpg')
         print(result.prediction)
         
       
