@@ -37,9 +37,12 @@
 # import the opencv library 
 import cv2 
   
-  
+from lobe import ImageModel
 # define a video capture object 
 vid = cv2.VideoCapture(0) 
+
+# Load the model
+model = ImageModel.load('/home/pi/Lobe/model')
   
 while(True): 
       
@@ -51,6 +54,13 @@ while(True):
     frame = cv2.flip(frame, 1)
     # Display the resulting frame 
     cv2.imshow('frame', frame) 
+
+    # capture image
+    if cv2.waitKey(1) & 0xFF == ord('c'):
+        cv2.imwrite('/home/pi/Pictures/image.jpg', frame)
+        result = model.predict_from_file('image.jpg')
+        print(result.prediction)
+        
       
     # the 'q' button is set as the 
     # quitting button you may use any 
@@ -58,6 +68,8 @@ while(True):
     if cv2.waitKey(1) & 0xFF == ord('q'): 
         break
   
+
+
 # After the loop release the cap object 
 vid.release() 
 # Destroy all the windows 
