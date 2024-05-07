@@ -36,7 +36,7 @@
 
 # import the opencv library 
 import cv2 
-  
+import numpy as np
   
 # define a video capture object 
 vid = cv2.VideoCapture(0) 
@@ -47,14 +47,23 @@ while(True):
     # by frame 
     ret, frame = vid.read() 
   
-    # Display the resulting frame 
-    cv2.imshow('frame', frame) 
-      
-    # the 'q' button is set as the 
-    # quitting button you may use any 
-    # desired button of your choice 
-    if cv2.waitKey(1) & 0xFF == ord('q'): 
+    # Converting the input frame to grayscale
+    gray=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)   
+
+    # Fliping the image as said in question
+    gray_flip = cv2.flip(gray,1)
+
+    # Combining the two different image frames in one window
+    combined_window = np.hstack([gray,gray_flip])
+
+    # Displaying the single window
+    cv2.imshow("Combined videos ",combined_window)
+    key=cv2.waitKey(1)
+
+    if key==ord('q'):
         break
+print(a)
+
   
 # After the loop release the cap object 
 vid.release() 
