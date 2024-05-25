@@ -81,17 +81,20 @@ while(True):
     #disable mirror effect
     frame = cv2.flip(frame, 1)
     # Display the resulting frame 
-    cv2.imshow('frame', frame) 
-
+    cv2.imshow('frame', frame)
     # capture image
     if cv2.waitKey(1) & 0xFF == ord('c'):
+        #resize image to 300x300
+        frame = cv2.resize(frame, (300, 300))
+        #save image
         cv2.imwrite('../Pictures/image.jpg', frame)
         result = model.predict_from_file('../Pictures/image.jpg')
         print(result.prediction)
-        motor.enable(True)        # enables stepper driver
-        motor.run(200*32, True)
-        motor.run(200*16, False)  
-        motor.enable(False)        # disables stepper driver
+
+        # motor.enable(True)        # enables stepper driver
+        # motor.run(200*32, True)
+        # motor.run(200*16, False)  
+        # motor.enable(False)        # disables stepper driver
         
       
     # the 'q' button is set as the 
