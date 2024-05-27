@@ -69,15 +69,15 @@ while(True):
     #disable mirror effect
     frame = cv2.flip(frame, 1)
     # zoom in the image
-    # frame = frame[100:500, 100:500]
+    frame = frame[100:500, 100:500]
     # Display the resulting frame 
     cv2.imshow('frame', frame)
     
     
     # capture image
-    for interval in IntervalTimer(7):
+    if cv2.waitKey(1) & 0xFF == ord('c'):
         #resize image to 300x300
-        # frame = cv2.resize(frame, (400, 400))
+        frame = cv2.resize(frame, (400, 400))
         #save image
         cv2.imwrite('../Pictures/image.jpg', frame)
         result = model.predict_from_file('../Pictures/image.jpg')
