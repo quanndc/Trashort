@@ -77,9 +77,9 @@ while(True):
     # capture image
     for interval in IntervalTimer(7):
         #resize image to 300x300
-        frame = cv2.resize(frame, (400, 400))
+        # frame = cv2.resize(frame, (400, 400))
         #save image
-        cv2.imwrite('../Pictures/image.jpg', frame)
+        cv2.imwrite('../Pictures/image.jpg', cv2.resize(frame, (500, 500)))
         result = model.predict_from_file('../Pictures/image.jpg')
         print(result.prediction)
 
