@@ -77,7 +77,7 @@ while(True):
         result = model.predict_from_file('../Pictures/image.jpg')
         print(result.prediction)
 
-        if result == 'Organic':
+        if result.prediction == 'Organic':
             motor.enable(True)        # enables stepper driver
             motor.run(200*8, True)
             motor.run(200*8, False)  
