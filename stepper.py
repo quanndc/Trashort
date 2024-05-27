@@ -68,6 +68,9 @@ while(True):
     frame = cv2.flip(frame, 1)
     # Display the resulting frame 
     cv2.imshow('frame', frame)
+    # zoom in the image
+    frame = frame[100:500, 100:500]
+    
     # capture image
     if cv2.waitKey(1) & 0xFF == ord('c'):
         #resize image to 300x300
