@@ -40,6 +40,8 @@ from lobe import ImageModel
 import time
 from rpi_python_drv8825.stepper import StepperMotor
 from time import sleep
+from interval_timer import IntervalTimer
+
 # GPIO setup
 enable_pin = 4
 step_pin = 18
@@ -73,7 +75,7 @@ while(True):
     
     
     # capture image
-    if cv2.waitKey(1) & 0xFF == ord('c'):
+    for interval in IntervalTimer(7):
         #resize image to 300x300
         frame = cv2.resize(frame, (400, 400))
         #save image
