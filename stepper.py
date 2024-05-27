@@ -51,21 +51,7 @@ fullstep_delay = .005
 
 # create object
 motor = StepperMotor(enable_pin, step_pin, dir_pin, mode_pins, step_type, fullstep_delay)
-# motor.enable(True)
-# for i in range(100):
 
-    # motor.enable(True)     # enables stepper driver
-    # motor.run(200*32, True)     # run motor 6400 steps clowckwise
-    # total_microsteps = 200*32 * 1/32
-    # print(total_microsteps)
-    # print(i+1.8)
-    # actual_rotation_angle = float(total_microsteps) * 1.8
-    # print("quay" + str(actual_rotation_angle))
-    #sleep(0.5)
-    # motor.run(200*32, False)  
-    # total_microsteps = 200*32 * 1/32
-    # print(total_microsteps)
-    # print(i+1.8)
 # define a video capture object 
 vid = cv2.VideoCapture(0) 
 
@@ -91,10 +77,10 @@ while(True):
         result = model.predict_from_file('../Pictures/image.jpg')
         print(result.prediction)
 
-        # motor.enable(True)        # enables stepper driver
-        # motor.run(200*32, True)
-        # motor.run(200*16, False)  
-        # motor.enable(False)        # disables stepper driver
+        motor.enable(True)        # enables stepper driver
+        motor.run(200*32, True)
+        motor.run(200*16, False)  
+        motor.enable(False)        # disables stepper driver
         
       
     # the 'q' button is set as the 
