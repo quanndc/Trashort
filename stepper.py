@@ -66,10 +66,11 @@ while(True):
   
     #disable mirror effect
     frame = cv2.flip(frame, 1)
-    # Display the resulting frame 
-    cv2.imshow('frame', frame)
     # zoom in the image
     frame = frame[100:500, 100:500]
+    # Display the resulting frame 
+    cv2.imshow('frame', frame)
+    
     
     # capture image
     if cv2.waitKey(1) & 0xFF == ord('c'):
