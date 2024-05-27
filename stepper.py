@@ -71,7 +71,7 @@ while(True):
     # capture image
     if cv2.waitKey(1) & 0xFF == ord('c'):
         #resize image to 300x300
-        frame = cv2.resize(frame, (300, 300))
+        frame = cv2.resize(frame, (400, 400))
         #save image
         cv2.imwrite('../Pictures/image.jpg', frame)
         result = model.predict_from_file('../Pictures/image.jpg')
@@ -87,6 +87,7 @@ while(True):
             motor.run(200*8, False)
             motor.run(200*8, True)  
             motor.enable(False)
+            # disables stepper driver
         
       
     # the 'q' button is set as the 
