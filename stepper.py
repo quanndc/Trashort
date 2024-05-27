@@ -78,8 +78,8 @@ while(True):
         print(result.prediction)
 
         motor.enable(True)        # enables stepper driver
-        motor.run(200*32, True)
-        motor.run(200*16, False)  
+        motor.run(200*8, True)
+        motor.run(200*8, False)  
         motor.enable(False)        # disables stepper driver
         
       
