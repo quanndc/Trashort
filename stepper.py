@@ -79,7 +79,7 @@ while(True):
         #resize image to 300x300
         # frame = cv2.resize(frame, (400, 400))
         #save image
-        cv2.imwrite('../Pictures/image.jpg', cv2.resize(frame, (500, 500)))
+        cv2.imwrite('../Pictures/image.jpg', frame)
         result = model.predict_from_file('../Pictures/image.jpg')
         print(result.prediction)
 
