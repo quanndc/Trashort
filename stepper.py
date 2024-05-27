@@ -77,10 +77,16 @@ while(True):
         result = model.predict_from_file('../Pictures/image.jpg')
         print(result.prediction)
 
-        motor.enable(True)        # enables stepper driver
-        motor.run(200*8, True)
-        motor.run(200*8, False)  
-        motor.enable(False)        # disables stepper driver
+        if result == 'Organic':
+            motor.enable(True)        # enables stepper driver
+            motor.run(200*8, True)
+            motor.run(200*8, False)  
+            motor.enable(False)
+        else:
+            motor.enable(True)        # enables stepper driver
+            motor.run(200*8, False)
+            motor.run(200*8, True)  
+            motor.enable(False)
         
       
     # the 'q' button is set as the 
