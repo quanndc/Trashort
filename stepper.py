@@ -36,9 +36,17 @@
 
 # import the opencv library 
 import os
-os.system('/bin/bash --rcfile /home/trashort/Repos/env/bin/activate')
-import cv2 
+import subprocess
 
+# Path to a Python interpreter that runs any Python script
+# under the virtualenv /path/to/virtualenv/
+python_bin = "/home/trashort/Repos/env/bin/activate"
+
+# Path to the script that must run under the virtualenv
+script_file = "/home/trashort/Repos/Trashort/env/bin/activate"
+
+subprocess.Popen([python_bin, script_file])
+import cv2 
 from lobe import ImageModel
 import time
 from rpi_python_drv8825.stepper import StepperMotor
