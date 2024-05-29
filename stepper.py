@@ -36,7 +36,7 @@
 
 # import the opencv library 
 import os
-os.system('source /home/trashort/Repos/env/bin/activate')
+os.system('/bin/bash --rcfile /home/trashort/Repos/env/bin/activate')
 import cv2 
 
 from lobe import ImageModel
