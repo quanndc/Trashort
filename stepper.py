@@ -74,7 +74,7 @@ while(True):
     # zoom in the image
     # frame = frame[100:500, 100:500]
     # Display the resulting frame 
-    cv2.imshow('frame', frame)
+    # cv2.imshow('frame', frame)
     
     
     # capture image
