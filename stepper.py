@@ -35,12 +35,15 @@
 #open camera with opencv
 
 # import the opencv library 
+import os
 import cv2 
+
 from lobe import ImageModel
 import time
 from rpi_python_drv8825.stepper import StepperMotor
 from time import sleep
 from interval_timer import IntervalTimer
+
 
 # GPIO setup
 enable_pin = 4
