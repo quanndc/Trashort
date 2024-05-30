@@ -83,7 +83,7 @@ while(True):
         frame = cv2.resize(frame, (400, 400))
         #save image
         cv2.imwrite('/home/trashort/Pictures/image.jpg', cv2.resize(frame, (400, 400)))
-        result = model.predict_from_file('../Pictures/image.jpg')
+        result = model.predict_from_file('/home/trashort/Pictures/image.jpg')
         print(result.prediction)
 
         if result.prediction == 'Organic':
