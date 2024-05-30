@@ -87,14 +87,14 @@ while(True):
         print(result.prediction)
 
         if result.prediction == 'Organic':
-            motor.enable(True)        # enables stepper driver
-            motor.run(200*8, True)
-            motor.run(200*8, False)  
+            motor.enable(True)
+            motor.run(200*8, False)
+            motor.run(200*8, True)          # enables stepper driver
             motor.enable(False)
         else:
             motor.enable(True)        # enables stepper driver
-            motor.run(200*8, False)
-            motor.run(200*8, True)  
+            motor.run(200*8, True)
+            motor.run(200*8, False)  
             motor.enable(False)
             # disables stepper driver
         
