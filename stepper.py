@@ -82,6 +82,7 @@ while(True):
         #resize image to 300x300
         # frame = cv2.resize(frame, (400, 400))
         #save image
+        cv2.imwrite('/home/pi/Pictures/default_background/default_background.jpg', cv2.resize(frame, (400, 400)))
         cv2.imwrite('/home/trashort/Pictures/image.jpg', cv2.resize(frame, (400, 400)))
         result = model.predict_from_file('/home/trashort/Pictures/image.jpg')
         print(result.prediction)
@@ -92,20 +93,16 @@ while(True):
             motor.run(200*8, False)  
             # enables stepper driver
             motor.enable(False)
+            break
         else:
             motor.enable(True)
             motor.run(200*8, False)
             motor.run(200*8, True)           # enables stepper driver
             
             motor.enable(False)
-            # disables stepper driver
-        
-      
-    # the 'q' button is set as the 
-    # quitting button you may use any 
-    # desired button of your choice 
-    if cv2.waitKey(2) & 0xFF == ord('q'): 
-        break
+    break;
+   # disables stepper driver
+
   
 
 
