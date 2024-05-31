@@ -63,14 +63,14 @@ vid = cv2.VideoCapture(0)
 # Load the model
 model = ImageModel.load('/home/pi/Lobe/model')
   
-while(True): 
+# while(True): 
       
     # Capture the video frame 
     # by frame 
-    ret, frame = vid.read() 
+ret, frame = vid.read() 
   
     #disable mirror effect
-    frame = cv2.flip(frame, 1)
+frame = cv2.flip(frame, 1)
     # zoom in the image
     # frame = frame[100:500, 100:500]
     # Display the resulting frame 
@@ -78,32 +78,29 @@ while(True):
     
     
     # capture image
-    for interval in IntervalTimer(7):
+    # for interval in IntervalTimer(7):
         #resize image to 300x300
         # frame = cv2.resize(frame, (400, 400))
         #save image
-        cv2.imwrite('/home/trashort/Pictures/default_background/default_background.jpg', cv2.resize(frame, (400, 400)))
-        cv2.imwrite('/home/trashort/Pictures/image.jpg', cv2.resize(frame, (400, 400)))
-        result = model.predict_from_file('/home/trashort/Pictures/image.jpg')
-        print(result.prediction)
+cv2.imwrite('/home/trashort/Pictures/default_background/default_background.jpg', cv2.resize(frame, (400, 400)))
+        # cv2.imwrite('/home/trashort/Pictures/image.jpg', cv2.resize(frame, (400, 400)))
+        # result = model.predict_from_file('/home/trashort/Pictures/image.jpg')
+        # print(result.prediction)
 
-        if result.prediction == 'Organic':
-            motor.enable(True)
-            motor.run(200*8, True)
-            motor.run(200*8, False)  
-            # enables stepper driver
-            motor.enable(False)
-            break
-        else:
-            motor.enable(True)
-            motor.run(200*8, False)
-            motor.run(200*8, True)           # enables stepper driver
+        # if result.prediction == 'Organic':
+        #     motor.enable(True)
+        #     motor.run(200*8, True)
+        #     motor.run(200*8, False)  
+        #     # enables stepper driver
+        #     motor.enable(False)
+        #     break
+        # else:
+        #     motor.enable(True)
+        #     motor.run(200*8, False)
+        #     motor.run(200*8, True)           # enables stepper driver
             
-            motor.enable(False)
-    break;
+        #     motor.enable(False)
    # disables stepper driver
-
-  
 
 
 # After the loop release the cap object 
