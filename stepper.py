@@ -104,6 +104,6 @@ cv2.imwrite('/home/trashort/Pictures/default_background/default_background.jpg',
 
 
 # After the loop release the cap object 
-vid.release() 
+# vid.release() 
 # Destroy all the windows 
-cv2.destroyAllWindows() 
+# cv2.destroyAllWindows() 
