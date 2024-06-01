@@ -32,9 +32,13 @@ while(True):
     for interval in IntervalTimer(7):
         #load the default background
         background = cv2.imread('/home/trashort/Pictures/default_background/default_background.jpg')
-        background_test = cv2.imread('/home/trashort/Pictures/default_background/image.jpg')
+        #resize the background to 400x400
+        background = cv2.resize(background, (400, 400))
+        # background_test = cv2.imread('/home/trashort/Pictures/default_background/image.jpg')
         #check if the background is the same as the default background
-        if cv2.subtract(background, background_test).mean() < 2:
+        # resize frame to 400x400
+        frame = cv2.resize(frame, (400, 400))
+        if cv2.subtract(background, frame).mean() < 2:
             print('Background is the same as default background')
             continue
         else:
