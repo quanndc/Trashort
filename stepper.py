@@ -35,6 +35,7 @@ while(True):
         background_test = cv2.imread('/home/trashort/Pictures/default_background/image.jpg')
         #check if the background is the same as the default background
         if cv2.subtract(background, background_test).mean() < 2:
+            print('Background is the same as default background')
             continue
         else:
             cv2.imwrite('/home/trashort/Pictures/image.jpg', frame)
