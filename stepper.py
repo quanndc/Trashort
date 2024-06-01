@@ -29,7 +29,7 @@ while(True):
     #disable mirror effect
     frame = cv2.flip(frame, 1)
     # capture image
-    for interval in IntervalTimer(7):
+    for interval in IntervalTimer(10):
         #load the default background
         background = cv2.imread('/home/trashort/Pictures/default_background/default_background.jpg')
         #resize the background to 400x400
