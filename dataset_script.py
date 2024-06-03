@@ -3,7 +3,7 @@ import cv2
 import time
 import os
 
-url = "http://localhost:1323/"
+url = "http://172.20.255.214:1323/"
 vid = cv2.VideoCapture(1)
 
 
