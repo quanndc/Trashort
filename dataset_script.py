@@ -3,8 +3,8 @@ import cv2
 import time
 import os
 
-url = "http://172.20.255.214:1323/"
-vid = cv2.VideoCapture(1)
+url = "http://localhost:1323/"
+vid = cv2.VideoCapture(0)
 
 
 def get_miliseconds():
@@ -16,7 +16,7 @@ while True:
         # disable mirror effect
   frame = cv2.flip(frame, 1)
         # show the frame
-#   cv2.imshow("frame", frame)
+  cv2.imshow("frame", frame)
   if cv2.waitKey(1) & 0xFF == ord("c"):
         # Capture the video frame by frame
         
@@ -26,7 +26,7 @@ while True:
     current_time = get_miliseconds()
     # cv2.imwrite(str(current_time) + ".jpg", frame)
     cv2.imwrite("/home/trashort/Pictures/" + str(current_time) + '.jpg', frame)
-    with open("/home/trashort/Pictures/"+str(current_time)+ '.jpg', "rb") as f:
+    with open(str(current_time)+ '.jpg', "rb") as f:
         img_data = f.read()
         img_name = str(current_time) + '.jpg'
 
@@ -38,6 +38,6 @@ while True:
   if cv2.waitKey(1) & 0xFF == ord("q"):
     break
 # After the loop release the cap object
-# vid.release()
+vid.release()
 # Destroy all the windows
-# cv2.destroyAllWindows()
+cv2.destroyAllWindows()
