@@ -5,7 +5,6 @@ import os
 from interval_timer import IntervalTimer
 
 url = "http://172.20.255.214:1323/"
-vid = cv2.VideoCapture(0)
 
 
 def get_miliseconds():
@@ -13,6 +12,7 @@ def get_miliseconds():
 
 
 for interval in IntervalTimer(10):
+    vid = cv2.VideoCapture(0)
     ret, frame = vid.read()
     # disable mirror effect
     frame = cv2.flip(frame, 1)
@@ -35,3 +35,5 @@ for interval in IntervalTimer(10):
     os.remove("/home/trashort/Pictures/" + str(current_time) + ".jpg")
     if r.status_code == 201:
         print("Image uploaded successfully!")
+        # turn off the camera
+        vid.release()
