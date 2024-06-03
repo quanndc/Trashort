@@ -27,7 +27,7 @@ while True:
     current_time = get_miliseconds()
     # cv2.imwrite(str(current_time) + ".jpg", frame)
     cv2.imwrite("/home/trashort/Pictures/" + str(current_time) + '.jpg', frame)
-    with open(str(current_time)+ '.jpg', "rb") as f:
+    with open("/home/trashort/Pictures/"+str(current_time)+ '.jpg', "rb") as f:
         img_data = f.read()
         img_name = str(current_time) + '.jpg'
 
