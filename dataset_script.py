@@ -16,7 +16,7 @@ while True:
         # disable mirror effect
   frame = cv2.flip(frame, 1)
         # show the frame
-  cv2.imshow("frame", frame)
+#   cv2.imshow("frame", frame)
   if cv2.waitKey(1) & 0xFF == ord("c"):
         # Capture the video frame by frame
         
@@ -38,6 +38,6 @@ while True:
   if cv2.waitKey(1) & 0xFF == ord("q"):
     break
 # After the loop release the cap object
-vid.release()
+# vid.release()
 # Destroy all the windows
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows()
