@@ -20,7 +20,7 @@ while True:
 #   cv2.imshow("frame", frame)
   for interval in IntervalTimer(10):
         # Capture the video frame by frame
-        
+    print("Capturing image...")
 
     # capture image
     # get the current time
@@ -35,10 +35,3 @@ while True:
     os.remove("/home/trashort/Pictures/" + str(current_time) + '.jpg')
     if r.status_code == 201:
         print("Image uploaded successfully!")
-        
-  if cv2.waitKey(1) & 0xFF == ord("q"):
-    break
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
-cv2.destroyAllWindows()
