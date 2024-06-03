@@ -4,7 +4,7 @@ import time
 import os
 from interval_timer import IntervalTimer
 
-url = "http://172.20.25.214:1323/"
+url = "http://172.20.255.214:1323/"
 vid = cv2.VideoCapture(0)
 
 
