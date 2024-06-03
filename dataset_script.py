@@ -2,6 +2,7 @@ import requests
 import cv2
 import time
 import os
+from interval_timer import IntervalTimer
 
 url = "http://localhost:1323/"
 vid = cv2.VideoCapture(0)
@@ -17,7 +18,7 @@ while True:
   frame = cv2.flip(frame, 1)
         # show the frame
 #   cv2.imshow("frame", frame)
-  if cv2.waitKey(1) & 0xFF == ord("c"):
+  for interval in IntervalTimer(10):
         # Capture the video frame by frame
         
 
