@@ -127,26 +127,26 @@ for interval in IntervalTimer(10):
     ret, frame = vid.read()
     # disable mirror effect
     frame = cv2.flip(frame, 1)
-    frameForCheck = frame
-    # resize the frame to 224x224
-    frame = cv2.resize(frame, (224, 224), interpolation=cv2.INTER_AREA)
-    # Make the image a numpy array and reshape it to the models input shape.
-    image = np.asarray(frame, dtype=np.float32).reshape(1, 224, 224, 3)
-    # Normalize the image array
-    image = (image / 127.5) - 1
+    # frameForCheck = frame
     # capture image
     background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     # resize the background to 400x400
     # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
     # check if the background is the same as the default background
 
-    diffPoints = checkBackground(background, frameForCheck)
+    diffPoints = checkBackground(background, frame)
     print(diffPoints)
     if diffPoints < 1:
         print("Background is the same as default background")
         vid.release()
         continue
     else:
+        # resize the frame to 224x224
+        frame = cv2.resize(frame, (224, 224), interpolation=cv2.INTER_AREA)
+        # Make the image a numpy array and reshape it to the models input shape.
+        image = np.asarray(frame, dtype=np.float32).reshape(1, 224, 224, 3)
+        # Normalize the image array
+        image = (image / 127.5) - 1
         result, prob = classify_image(model, image)
         labels = load_labels(label_path)
         classification_label = labels[result]
