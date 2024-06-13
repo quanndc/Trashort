@@ -70,9 +70,9 @@ for interval in IntervalTimer(10):
     # resize the frame to 224x224
     frame = cv2.resize(frame, (224, 224), interpolation=cv2.INTER_AREA)
     # Make the image a numpy array and reshape it to the models input shape.
-    frame = np.asarray(frame, dtype=np.float32).reshape(1, 224, 224, 3)
+    image = np.asarray(frame, dtype=np.float32).reshape(1, 224, 224, 3)
     # Normalize the image array
-    frame = (frame / 127.5) - 1
+    image = (image / 127.5) - 1
     # capture image
     background = cv2.imread(
         "/home/trashort/Pictures/default_background/default_background.jpg"
