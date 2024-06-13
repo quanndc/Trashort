@@ -58,9 +58,11 @@ def classify_image(interpreter, image, top_k=1):
     return [(i, output[i]) for i in ordered[:top_k]][0]
 
 
-def checkBackground(background, frame):
+def checkBackground():
     padding_left = 100
     padding_right = 160
+    background = cv.imread("/home/trashort/Pictures/default_background/image.jpg")
+    frame = cv.imread("/home/trashort/Pictures/image.jpg")
     background = background[:, padding_left : background.shape[1] - padding_right]
     frame = frame[:, padding_left : frame.shape[1] - padding_right]
 
@@ -126,7 +128,7 @@ for interval in IntervalTimer(10):
     # frameForCheck = frame
     # capture image
     cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
-    pic = cv2.imread("/home/trashort/Pictures/image.jpg")
+    # pic = cv2.imread("/home/trashort/Pictures/image.jpg")
     # get background image
     background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     # resize the background to 400x400
@@ -135,7 +137,7 @@ for interval in IntervalTimer(10):
     # diffPoints = 0
     print(background.shape)
     print(frame.shape)
-    diffPoints = checkBackground(background, pic)
+    diffPoints = checkBackground()
     print(diffPoints)
     os.remove("/home/trashort/Pictures/image.jpg")
     if diffPoints < 1:
