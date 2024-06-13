@@ -115,9 +115,9 @@ def checkBackground(background, frame):
 model = Interpreter(model_path)
 model.allocate_tensors()
 _, height, width, _ = model.get_input_details()[0]["shape"]
+vid = cv2.VideoCapture(0)
 
 for interval in IntervalTimer(10):
-    vid = cv2.VideoCapture(0)
     ret, frame = vid.read()
     # disable mirror effect
     frame = cv2.flip(frame, 1)
