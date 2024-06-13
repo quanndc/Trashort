@@ -133,13 +133,13 @@ for interval in IntervalTimer(10):
     cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
     # pic = cv2.imread("/home/trashort/Pictures/image.jpg")
     # get background image
-    background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
+    # background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     # resize the background to 400x400
     # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
     # check if the background is the same as the default background
     # diffPoints = 0
-    print(background.shape)
-    print(frame.shape)
+    # print(background.shape)
+    # print(frame.shape)
     diffPoints = checkBackground()
     print(diffPoints)
     os.remove("/home/trashort/Pictures/image.jpg")
