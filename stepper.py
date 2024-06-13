@@ -98,9 +98,6 @@ def checkBackground(background, frame):
         flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS,
     )
 
-    #print the points difference between the two images
-    # print(matches[0].queryIdx, matches[0].trainIdx)
-    print(kp1[matches[1].queryIdx].pt, kp2[matches[1].trainIdx].pt)
 
     totalDistance = 0
     averageDistance = 0
