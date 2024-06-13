@@ -131,13 +131,15 @@ for interval in IntervalTimer(10):
     # cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
     # pic = cv2.imread("/home/trashort/Pictures/image.jpg")
     # get background image
-    background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
+    background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg",cv2.COLOR_BGR2GRAY)
     
     padding_left = 100
     padding_right = 160
     background = background[:, padding_left : background.shape[1] - padding_right]
     frame = frame[:, padding_left : frame.shape[1] - padding_right]
     
+    #add gray scale to the image
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
     # resize the background to 400x400
     # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
