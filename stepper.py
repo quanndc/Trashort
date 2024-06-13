@@ -89,9 +89,9 @@ def checkBackground(background, frame):
 
     # Draw first 10 matches.
     img3 = cv.drawMatches(
-        img1,
+        background,
         kp1,
-        img2,
+        frame,
         kp2,
         matches[:10],
         None,
