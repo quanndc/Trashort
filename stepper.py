@@ -93,7 +93,7 @@ def checkBackground(background, frame):
     
     #caculate the average difference between the keypoints
     totalDistance = 0
-    avaregeDistance = 0
+    averageDistance = 0
     #calculate all distances between the two images
     for i in range(len(matches)):
         print(kp1[matches[i].queryIdx].pt, kp2[matches[i].trainIdx].pt)
@@ -101,8 +101,8 @@ def checkBackground(background, frame):
         distance = (np.linalg.norm(np.array(kp1[matches[i].queryIdx].pt) - np.array(kp2[matches[i].trainIdx].pt)))
         totalDistance += distance
 
-    avaregeDistance = totalDistance / len(matches)
-    return avaregeDistance
+    averageDistance = totalDistance / len(matches)
+    return averageDistance
 
 model = Interpreter(model_path)
 model.allocate_tensors()
