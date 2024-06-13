@@ -62,10 +62,7 @@ def checkBackground(img1, img2):
     # img1 = cv.imread("/home/trashort/Pictures/image.jpg",cv.IMREAD_GRAYSCALE)  # queryImage
     # img2 = cv.imread("/home/trashort/Pictures/default_background/image.jpg",cv.IMREAD_GRAYSCALE)  # trainImage
 
-    # padding_left = 100
-    # padding_right = 160
-    # img1 = img1[:, padding_left : img1.shape[1] - padding_right]
-    # img2 = img2[:, padding_left : img2.shape[1] - padding_right]
+    
 
     # show img1
     # plt.imshow(img1)
@@ -135,6 +132,13 @@ for interval in IntervalTimer(10):
     # pic = cv2.imread("/home/trashort/Pictures/image.jpg")
     # get background image
     background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
+    
+    padding_left = 100
+    padding_right = 160
+    background = background[:, padding_left : background.shape[1] - padding_right]
+    frame = frame[:, padding_left : frame.shape[1] - padding_right]
+    
+    
     # resize the background to 400x400
     # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
     # check if the background is the same as the default background
