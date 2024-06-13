@@ -59,12 +59,13 @@ def classify_image(interpreter, image, top_k=1):
 
 
 def checkBackground():
+    img1 = cv.imread("/home/trashort/Pictures/image.jpg")  # queryImage
+    img2 = cv.imread("/home/trashort/Pictures/default_background/image.jpg")  # trainImage
+
     padding_left = 100
     padding_right = 160
-    background = cv.imread("/home/trashort/Pictures/default_background/image.jpg")
-    frame = cv.imread("/home/trashort/Pictures/image.jpg")
-    background = background[:, padding_left : background.shape[1] - padding_right]
-    frame = frame[:, padding_left : frame.shape[1] - padding_right]
+    img1 = img1[:, padding_left : img1.shape[1] - padding_right]
+    img2 = img2[:, padding_left : img2.shape[1] - padding_right]
 
     # show img1
     # plt.imshow(img1)
@@ -74,14 +75,15 @@ def checkBackground():
     orb = cv.ORB_create()
 
     # find the keypoints and descriptors with ORB
-    kp1, des1 = orb.detectAndCompute(background, None)
-    kp2, des2 = orb.detectAndCompute(frame, None)
+    kp1, des1 = orb.detectAndCompute(img1, None)
+    kp2, des2 = orb.detectAndCompute(img2, None)
 
     # create BFMatcher object
     bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
 
     # Match descriptors.
     matches = bf.match(des1, des2)
+
 
     # Sort them in the order of their distance.
     matches = sorted(matches, key=lambda x: x.distance)
@@ -90,31 +92,31 @@ def checkBackground():
 
     # Draw first 10 matches.
     img3 = cv.drawMatches(
-        background,
+        img1,
         kp1,
-        frame,
+        img2,
         kp2,
         matches[:10],
         None,
         flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS,
     )
 
+    #print the points difference between the two images
+    # print(matches[0].queryIdx, matches[0].trainIdx)
+    # print(kp1[matches[1].queryIdx].pt, kp2[matches[1].trainIdx].pt)
+
     totalDistance = 0
-    averageDistance = 0
-    # calculate all distances between the two images
+    avaregeDistance = 0
+    #calculate all distances between the two images
     for i in range(len(matches)):
         print(kp1[matches[i].queryIdx].pt, kp2[matches[i].trainIdx].pt)
-        # calculate the distance between the two points
-        distance = np.linalg.norm(
-            np.array(kp1[matches[i].queryIdx].pt)
-            - np.array(kp2[matches[i].trainIdx].pt)
-        )
+        #calculate the distance between the two points
+        distance = (np.linalg.norm(np.array(kp1[matches[i].queryIdx].pt) - np.array(kp2[matches[i].trainIdx].pt)))
         totalDistance += distance
 
-    # averageDistance = totalDistance / len(matches)
-    print(totalDistance)
-    print(averageDistance)
-    return averageDistance
+    avaregeDistance = totalDistance / len(matches)
+    print(avaregeDistance)
+    return avaregeDistance
 
 
 model = Interpreter(model_path)
