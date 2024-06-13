@@ -99,6 +99,7 @@ for interval in IntervalTimer(10):
     ret, frame = vid.read()
     # disable mirror effect
     frame = cv2.flip(frame, 1)
+    frameForCheck = frame
     # resize the frame to 224x224
     frame = cv2.resize(frame, (224, 224), interpolation=cv2.INTER_AREA)
     # Make the image a numpy array and reshape it to the models input shape.
@@ -108,10 +109,10 @@ for interval in IntervalTimer(10):
     # capture image
     background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     # resize the background to 400x400
-    background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
+    # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
     # check if the background is the same as the default background
 
-    diffPoints = checkBackground(background, frame)
+    diffPoints = checkBackground(background, frameForCheck)
     print(diffPoints)
     if diffPoints < 1:
         print("Background is the same as default background")
