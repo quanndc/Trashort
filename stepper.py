@@ -137,7 +137,7 @@ for interval in IntervalTimer(10):
     print(frame.shape)
     if diffPoints < 1:
         print("Background is the same as default background")
-        os.remove("/home/trashort/Pictures/image.jpg")
+        # os.remove("/home/trashort/Pictures/image.jpg")
         vid.release()
         # continue
     else:
