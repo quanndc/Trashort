@@ -24,7 +24,7 @@ motor = StepperMotor(
 )
 
 # define a video capture object
-vid = cv2.VideoCapture(0)
+# vid = cv2.VideoCapture(0)
 
 # project folder
 project_folder = "/home/trashort/Repos/Trashort/"
