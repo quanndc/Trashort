@@ -62,10 +62,10 @@ def checkBackground():
     img1 = cv.imread("/home/trashort/Pictures/image.jpg",cv.IMREAD_GRAYSCALE)  # queryImage
     img2 = cv.imread("/home/trashort/Pictures/default_background/image.jpg",cv.IMREAD_GRAYSCALE)  # trainImage
 
-    padding_left = 100
-    padding_right = 160
-    img1 = img1[:, padding_left : img1.shape[1] - padding_right]
-    img2 = img2[:, padding_left : img2.shape[1] - padding_right]
+    # padding_left = 100
+    # padding_right = 160
+    # img1 = img1[:, padding_left : img1.shape[1] - padding_right]
+    # img2 = img2[:, padding_left : img2.shape[1] - padding_right]
 
     # show img1
     # plt.imshow(img1)
