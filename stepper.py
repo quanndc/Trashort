@@ -123,7 +123,7 @@ for interval in IntervalTimer(10):
     frame = cv2.flip(frame, 1)
     # frameForCheck = frame
     #capture image
-    cv2.imwrite("/home/trashort/Pictures/image" + ".jpg", frame)
+    cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
     pic = cv2.imread("/home/trashort/Pictures/image.jpg")
     #get background image
     background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
@@ -137,8 +137,9 @@ for interval in IntervalTimer(10):
     print(pic.shape)
     if diffPoints < 1:
         print("Background is the same as default background")
+        os.remove("/home/trashort/Pictures/image.jpg")
         vid.release()
-        continue
+        # continue
     else:
         # resize the frame to 224x224
         frame = cv2.resize(frame, (224, 224), interpolation=cv2.INTER_AREA)
