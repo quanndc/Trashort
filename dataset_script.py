@@ -4,7 +4,7 @@ import time
 import os
 from interval_timer import IntervalTimer
 
-url = "http://172.20.255.198:1323/"
+url = "http://172.16.0.138:1323/"
 
 
 def get_miliseconds():
