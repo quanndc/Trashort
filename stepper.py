@@ -58,7 +58,7 @@ def classify_image(interpreter, image, top_k=1):
     return [(i, output[i]) for i in ordered[:top_k]][0]
 
 
-def checkBackground(img1, img2):
+def checkBackground():
     img1 = cv.imread("/home/trashort/Pictures/default_background/image.jpg", cv.IMREAD_GRAYSCALE)  # queryImage
     img2 = cv.imread("/home/trashort/Repos/Pictures/image.jpg",cv.IMREAD_GRAYSCALE)  # trainImage
 
@@ -113,15 +113,15 @@ for interval in IntervalTimer(10):
     frame = cv2.flip(frame, 1)
     # frameForCheck = frame
     # capture image
-    # cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
+    cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
     # pic = cv2.imread("/home/trashort/Pictures/image.jpg")
     # get background image
-    background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
+    # background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     
-    padding_left = 100
-    padding_right = 160
-    background = background[:, padding_left : background.shape[1] - padding_right]
-    frame = frame[:, padding_left : frame.shape[1] - padding_right]
+    # padding_left = 100
+    # padding_right = 160
+    # background = background[:, padding_left : background.shape[1] - padding_right]
+    # frame = frame[:, padding_left : frame.shape[1] - padding_right]
     
     
     # resize the background to 400x400
@@ -130,9 +130,9 @@ for interval in IntervalTimer(10):
     # diffPoints = 0
     # print(background.shape)
     # print(frame.shape)
-    diffPoints = checkBackground(background, frame)
+    diffPoints = checkBackground()
     print(diffPoints)
-    # os.remove("/home/trashort/Pictures/image.jpg")
+    os.remove("/home/trashort/Pictures/image.jpg")
     if diffPoints < 1:
         print("Background is the same as default background")
         # os.remove("/home/trashort/Pictures/image.jpg")
