@@ -142,7 +142,7 @@ for interval in IntervalTimer(10):
     # print(frame.shape)
     diffPoints = checkBackground(background, frame)
     print(diffPoints)
-    os.remove("/home/trashort/Pictures/image.jpg")
+    # os.remove("/home/trashort/Pictures/image.jpg")
     if diffPoints < 1:
         print("Background is the same as default background")
         # os.remove("/home/trashort/Pictures/image.jpg")
