@@ -59,10 +59,13 @@ def classify_image(interpreter, image, top_k=1):
 
 
 def checkBackground(img1, img2):
-    # img1 = cv.imread("/home/trashort/Pictures/image.jpg",cv.IMREAD_GRAYSCALE)  # queryImage
-    # img2 = cv.imread("/home/trashort/Pictures/default_background/image.jpg",cv.IMREAD_GRAYSCALE)  # trainImage
+    img1 = cv.imread("/home/trashort/Pictures/default_background/image", cv.IMREAD_GRAYSCALE)  # queryImage
+    img2 = cv.imread("/home/trashort/Repos/Pictures/image",cv.IMREAD_GRAYSCALE)  # trainImage
 
-    
+    padding_left = 100
+    padding_right = 180
+    img1 = img1[:, padding_left : img1.shape[1] - padding_right]
+    img2 = img2[:, padding_left : img2.shape[1] - padding_right]
 
     # show img1
     # plt.imshow(img1)
@@ -70,40 +73,32 @@ def checkBackground(img1, img2):
 
     # Initiate SIFT detector
     sift = cv.SIFT_create()
-    
+        
     # find the keypoints and descriptors with SIFT
     kp1, des1 = sift.detectAndCompute(img1,None)
     kp2, des2 = sift.detectAndCompute(img2,None)
-    
+        
     # BFMatcher with default params
     bf = cv.BFMatcher()
     matches = bf.knnMatch(des1,des2,k=2)
-    
+        
     # Apply ratio test
+
+    total = 0
+    avg = 0
+
+
     good = []
     for m,n in matches:
+        # print(m.distance)
+        # print(n.distance)
         if m.distance < 0.75*n.distance:
+            total += m.distance
+            # print(m.distance)
             good.append([m])
-    
-    # cv.drawMatchesKnn expects list of lists as matches.
-    img3 = cv.drawMatchesKnn(img1,kp1,img2,kp2,good,None,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-
-    #print the points difference between the two images
-    # print(matches[0].queryIdx, matches[0].trainIdx)
-    # print(kp1[matches[1].queryIdx].pt, kp2[matches[1].trainIdx].pt)
-
-    totalDistance = 0
-    avaregeDistance = 0
-    #calculate all distances between the two images
-    for i in range(len(matches)):
-        print(kp1[matches[i].queryIdx].pt, kp2[matches[i].trainIdx].pt)
-        #calculate the distance between the two points
-        distance = (np.linalg.norm(np.array(kp1[matches[i].queryIdx].pt) - np.array(kp2[matches[i].trainIdx].pt)))
-        totalDistance += distance
-
-    avaregeDistance = totalDistance / len(matches)
-    print(avaregeDistance)
-    return avaregeDistance
+    avg = total / len(good)    
+    print(avg)
+    return avg
 
 
 model = Interpreter(model_path)
