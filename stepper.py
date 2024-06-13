@@ -81,7 +81,7 @@ for interval in IntervalTimer(10):
     background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
     # check if the background is the same as the default background
     print(cv2.subtract(background, frame).mean())
-    if cv2.subtract(background, frame).mean() < 2:
+    if cv2.subtract(background, frame).mean() < 20:
         print("Background is the same as default background")
         vid.release()
         continue
@@ -105,7 +105,7 @@ for interval in IntervalTimer(10):
             vid.release()
             
         else:
-            print("Organic waste")
+            print("Recycle waste")
             motor.enable(True)
             motor.run(200 * 8, False)
             motor.run(200 * 8, True)
