@@ -75,7 +75,7 @@ for interval in IntervalTimer(10):
     image = (image / 127.5) - 1
     # capture image
     background = cv2.imread(
-        "/home/trashort/Pictures/default_background/default_background.jpg"
+        "/home/trashort/Pictures/default_background/image.jpg"
     )
     # resize the background to 400x400
     background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
