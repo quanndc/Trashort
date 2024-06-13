@@ -111,7 +111,8 @@ def checkBackground():
         )
         totalDistance += distance
 
-    averageDistance = totalDistance / len(matches)
+    # averageDistance = totalDistance / len(matches)
+    print(totalDistance)
     print(averageDistance)
     return averageDistance
 
