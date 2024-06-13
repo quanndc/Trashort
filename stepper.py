@@ -68,35 +68,25 @@ def checkBackground(img1, img2):
     # plt.imshow(img1)
     # plt.show()
 
-    # Initiate ORB detector
-    orb = cv.ORB_create()
-
-    # find the keypoints and descriptors with ORB
-    kp1, des1 = orb.detectAndCompute(img1, None)
-    kp2, des2 = orb.detectAndCompute(img2, None)
-
-    # create BFMatcher object
-    bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
-
-    # Match descriptors.
-    matches = bf.match(des1, des2)
-
-
-    # Sort them in the order of their distance.
-    matches = sorted(matches, key=lambda x: x.distance)
-
-    # print(matches)
-
-    # Draw first 10 matches.
-    img3 = cv.drawMatches(
-        img1,
-        kp1,
-        img2,
-        kp2,
-        matches[:10],
-        None,
-        flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS,
-    )
+    # Initiate SIFT detector
+    sift = cv.SIFT_create()
+    
+    # find the keypoints and descriptors with SIFT
+    kp1, des1 = sift.detectAndCompute(img1,None)
+    kp2, des2 = sift.detectAndCompute(img2,None)
+    
+    # BFMatcher with default params
+    bf = cv.BFMatcher()
+    matches = bf.knnMatch(des1,des2,k=2)
+    
+    # Apply ratio test
+    good = []
+    for m,n in matches:
+        if m.distance < 0.75*n.distance:
+            good.append([m])
+    
+    # cv.drawMatchesKnn expects list of lists as matches.
+    img3 = cv.drawMatchesKnn(img1,kp1,img2,kp2,good,None,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
     #print the points difference between the two images
     # print(matches[0].queryIdx, matches[0].trainIdx)
@@ -131,15 +121,13 @@ for interval in IntervalTimer(10):
     # cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
     # pic = cv2.imread("/home/trashort/Pictures/image.jpg")
     # get background image
-    background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg",cv2.COLOR_BGR2GRAY)
+    background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     
     padding_left = 100
     padding_right = 160
     background = background[:, padding_left : background.shape[1] - padding_right]
     frame = frame[:, padding_left : frame.shape[1] - padding_right]
     
-    #add gray scale to the image
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
     # resize the background to 400x400
     # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
