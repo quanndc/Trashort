@@ -81,7 +81,6 @@ def checkBackground(background, frame):
     # Match descriptors.
     matches = bf.match(des1, des2)
 
-
     # Sort them in the order of their distance.
     matches = sorted(matches, key=lambda x: x.distance)
 
@@ -98,19 +97,22 @@ def checkBackground(background, frame):
         flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS,
     )
 
-
     totalDistance = 0
     averageDistance = 0
-    #calculate all distances between the two images
+    # calculate all distances between the two images
     for i in range(len(matches)):
         print(kp1[matches[i].queryIdx].pt, kp2[matches[i].trainIdx].pt)
-        #calculate the distance between the two points
-        distance = (np.linalg.norm(np.array(kp1[matches[i].queryIdx].pt) - np.array(kp2[matches[i].trainIdx].pt)))
+        # calculate the distance between the two points
+        distance = np.linalg.norm(
+            np.array(kp1[matches[i].queryIdx].pt)
+            - np.array(kp2[matches[i].trainIdx].pt)
+        )
         totalDistance += distance
 
-    averageDistance = totalDistance/len(matches)
+    averageDistance = totalDistance / len(matches)
     print(averageDistance)
     return averageDistance
+
 
 model = Interpreter(model_path)
 model.allocate_tensors()
@@ -122,19 +124,20 @@ for interval in IntervalTimer(10):
     # disable mirror effect
     frame = cv2.flip(frame, 1)
     # frameForCheck = frame
-    #capture image
+    # capture image
     # cv2.imwrite("/home/trashort/Pictures/image.jpg", frame)
     # pic = cv2.imread("/home/trashort/Pictures/image.jpg")
-    #get background image
+    # get background image
     background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     # resize the background to 400x400
     # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
     # check if the background is the same as the default background
     # diffPoints = 0
-    diffPoints = checkBackground(background, frame)
-    print(diffPoints)
     print(background.shape)
     print(frame.shape)
+    diffPoints = checkBackground(background, frame)
+    print(diffPoints)
+
     if diffPoints < 1:
         print("Background is the same as default background")
         # os.remove("/home/trashort/Pictures/image.jpg")
