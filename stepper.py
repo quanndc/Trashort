@@ -6,7 +6,7 @@ from interval_timer import IntervalTimer
 from tflite_runtime.interpreter import Interpreter
 import numpy as np
 import time
-import cv2
+import cv2 as cv
 import os
 
 # GPIO setup
@@ -57,6 +57,29 @@ def classify_image(interpreter, image, top_k=1):
     ordered = np.argpartition(-output, 1)
     return [(i, output[i]) for i in ordered[:top_k]][0]
 
+def checkBackground(background, frame):
+    
+    # create BFMatcher object
+    bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
+    
+    # Match descriptors.
+    matches = bf.match(des1,des2)
+    
+    # Sort them in the order of their distance.
+    matches = sorted(matches, key = lambda x:x.distance)
+    
+    # Draw first 10 matches.
+    img3 = cv.drawMatches(background,kp1,frame,kp2,matches[:10],None,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+    
+    # Initiate ORB detector
+    orb = cv.ORB_create()
+    
+    # find the keypoints and descriptors with ORB
+    kp1, des1 = orb.detectAndCompute(background,None)
+    kp2, des2 = orb.detectAndCompute(frame,None)
+    
+    return print(kp1[matches[0].queryIdx].pt[0] - kp2[matches[0].trainIdx].pt[0])
+
 
 model = Interpreter(model_path)
 model.allocate_tensors()
@@ -80,8 +103,10 @@ for interval in IntervalTimer(10):
     # resize the background to 400x400
     background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
     # check if the background is the same as the default background
-    print(cv2.subtract(background, frame).mean())
-    if cv2.subtract(background, frame).mean() < 20:
+    
+    diffPoints = checkBackground(background, frame)
+    
+    if diffPoints < 1:
         print("Background is the same as default background")
         vid.release()
         continue
