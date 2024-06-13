@@ -105,7 +105,7 @@ for interval in IntervalTimer(10):
     # check if the background is the same as the default background
     
     diffPoints = checkBackground(background, frame)
-    
+    print(diffPoints)
     if diffPoints < 1:
         print("Background is the same as default background")
         vid.release()
