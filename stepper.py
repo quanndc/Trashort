@@ -122,7 +122,10 @@ for interval in IntervalTimer(10):
     # disable mirror effect
     frame = cv2.flip(frame, 1)
     # frameForCheck = frame
-    # capture image
+    #capture image
+    cv2.imwrite("/home/trashort/Pictures/image" + ".jpg", frame)
+    pic = cv2.imread("/home/trashort/Pictures/image.jpg")
+    #get background image
     background = cv2.imread("/home/trashort/Pictures/default_background/image.jpg")
     # resize the background to 400x400
     # background = cv2.resize(background, (224, 224), interpolation=cv2.INTER_AREA)
@@ -131,7 +134,7 @@ for interval in IntervalTimer(10):
     # diffPoints = checkBackground(background, frame)
     print(diffPoints)
     print(background.shape)
-    print(frame.shape)
+    print(pic.shape)
     if diffPoints < 1:
         print("Background is the same as default background")
         vid.release()
