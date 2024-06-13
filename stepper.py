@@ -59,13 +59,10 @@ def classify_image(interpreter, image, top_k=1):
 
 
 def checkBackground(background, frame):
-    img1 = background  # queryImage
-    img2 = frame  # trainImage
-
     padding_left = 100
     padding_right = 160
-    img1 = img1[:, padding_left : img1.shape[1] - padding_right]
-    img2 = img2[:, padding_left : img2.shape[1] - padding_right]
+    background = background[:, padding_left : background.shape[1] - padding_right]
+    frame = frame[:, padding_left : frame.shape[1] - padding_right]
 
     # show img1
     # plt.imshow(img1)
