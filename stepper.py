@@ -86,7 +86,7 @@ def checkBackground(background, frame):
         kp1,
         frame,
         kp2,
-        matches[:1],
+        matches[:10],
         None,
         flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS,
     )
