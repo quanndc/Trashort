@@ -60,6 +60,10 @@ def classify_image(interpreter, image, top_k=1):
 
 def checkBackground(background, frame):
 
+    padding_left = 100
+    padding_right = 160
+    background = background[:, padding_left : background.shape[1] - padding_right]
+    frame = frame[:, padding_left : frame.shape[1] - padding_right]
     # Initiate ORB detector
     orb = cv.ORB_create()
 
@@ -86,6 +90,9 @@ def checkBackground(background, frame):
         None,
         flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS,
     )
+    
+    #caculate the average difference between the keypoints
+    
 
     return kp1[matches[0].queryIdx].pt[0] - kp2[matches[0].trainIdx].pt[0]
 
