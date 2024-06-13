@@ -72,8 +72,8 @@ def checkBackground(background, frame):
     orb = cv.ORB_create()
 
     # find the keypoints and descriptors with ORB
-    kp1, des1 = orb.detectAndCompute(img1, None)
-    kp2, des2 = orb.detectAndCompute(img2, None)
+    kp1, des1 = orb.detectAndCompute(background, None)
+    kp2, des2 = orb.detectAndCompute(frame, None)
 
     # create BFMatcher object
     bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
