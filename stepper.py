@@ -93,7 +93,7 @@ def checkBackground(background, frame):
     
     #caculate the average difference between the keypoints
     totalDistance = 0
-    averageDistance = 0
+    averageDistance = 1
     #calculate all distances between the two images
     for i in range(len(matches)):
         print(kp1[matches[i].queryIdx].pt, kp2[matches[i].trainIdx].pt)
