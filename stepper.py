@@ -87,7 +87,7 @@ def checkBackground(background, frame):
         flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS,
     )
 
-    return print(kp1[matches[0].queryIdx].pt[0] - kp2[matches[0].trainIdx].pt[0])
+    return kp1[matches[0].queryIdx].pt[0] - kp2[matches[0].trainIdx].pt[0]
 
 
 model = Interpreter(model_path)
