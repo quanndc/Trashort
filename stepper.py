@@ -85,7 +85,7 @@ def checkBackground(img1, img2):
     # Sort them in the order of their distance.
     matches = sorted(matches, key=lambda x: x.distance)
 
-    print(matches)
+    # print(matches)
 
     # Draw first 10 matches.
     img3 = cv.drawMatches(
