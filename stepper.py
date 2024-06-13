@@ -59,8 +59,8 @@ def classify_image(interpreter, image, top_k=1):
 
 
 def checkBackground():
-    img1 = cv.imread("/home/trashort/Pictures/default_background/image.jpg", cv.IMREAD_GRAYSCALE)  # queryImage
-    img2 = cv.imread("/home/trashort/Repos/Pictures/image.jpg",cv.IMREAD_GRAYSCALE)  # trainImage
+    img1 = cv.imread("/home/trashort/Pictures/default_background/image.jpg")  # queryImage
+    img2 = cv.imread("/home/trashort/Repos/Pictures/image.jpg")  # trainImage
 
     padding_left = 100
     padding_right = 180
