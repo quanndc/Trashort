@@ -51,31 +51,6 @@ def classify_image(interpreter, image, top_k=1):
     return [(i, output[i]) for i in ordered[:top_k]][0]
 
 
-def checkBackground(img1, img2):
-    padding_left = 100
-    padding_right = 180
-    img1 = img1[:, padding_left : img1.shape[1] - padding_right]
-    img2 = img2[:, padding_left : img2.shape[1] - padding_right]
-    # Initiate SIFT detector
-    sift = cv.SIFT_create()
-    # find the keypoints and descriptors with SIFT
-    kp1, des1 = sift.detectAndCompute(img1,None)
-    kp2, des2 = sift.detectAndCompute(img2,None)
-    # BFMatcher with default params
-    bf = cv.BFMatcher()
-    matches = bf.knnMatch(des1,des2,k=2)  
-    # Apply ratio test
-    total = 0
-    avg = 0
-    good = []
-    for m,n in matches:
-        if m.distance < 0.75*n.distance:
-            total += m.distance
-            good.append([m])
-    avg = total / len(good)    
-    print(avg)
-    return avg
-
 model = Interpreter(model_path)
 model.allocate_tensors()
 _, height, width, _ = model.get_input_details()[0]["shape"]
