@@ -31,7 +31,7 @@ for interval in IntervalTimer(10):
         img_data = f.read()
         img_name = str(current_time) + ".jpg"
 
-    r = requests.post(url + "uploadRecycle", files={"file": img_data})
+    r = requests.post(url + "uploadBackground", files={"file": img_data})
     os.remove("/home/trashort/Pictures/" + str(current_time) + ".jpg")
     if r.status_code == 201:
         print("Image uploaded successfully!")
