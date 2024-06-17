@@ -70,6 +70,8 @@ for interval in IntervalTimer(10):
     result, prob = classify_image(model, image)
     labels = load_labels(label_path)
     classification_label = labels[result]
+    print(classification_label)
+    print(result)
     # turn the stepper
     if result == 0:
         print("Background")
