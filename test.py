@@ -70,12 +70,14 @@ for interval in IntervalTimer(10):
     result, prob = classify_image(model, image)
     labels = load_labels(label_path)
     classification_label = labels[result]
-    print(classification_label)
+    # print(classification_label)
     print(result)
+    print(prob)
     # turn the stepper
     if result == 0:
         print("Background")
         vid.release()
+        continue
     elif result == 1:
         print("Recycle waste")
         motor.enable(True)
@@ -85,6 +87,7 @@ for interval in IntervalTimer(10):
         motor.enable(False)
         vid.release()
     else:
+        print("Organic waste")
         motor.enable(True)
         motor.run(200 * 8, True)
         motor.run(200 * 8, False)
