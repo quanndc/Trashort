@@ -1,2 +1,3 @@
-0 Organic
+0 Background
 1 Recycle
+2 Organic
