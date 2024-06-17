@@ -66,7 +66,7 @@ for interval in IntervalTimer(10):
     # Make the image a numpy array and reshape it to the models input shape.
     image = np.asarray(frame, dtype=np.float32).reshape(1, 224, 224, 3)
     # Normalize the image array
-    image = (image / 127.5) - 1
+    # image = (image / 127.5) - 1
     result, prob = classify_image(model, image)
     labels = load_labels(label_path)
     classification_label = labels[result]
@@ -76,7 +76,7 @@ for interval in IntervalTimer(10):
     # turn the stepper
     if result == 0:
         print("Background")
-        vid.release()
+        # vid.release()
         continue
     elif result == 1:
         print("Recycle waste")
