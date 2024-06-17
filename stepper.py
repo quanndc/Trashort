@@ -76,8 +76,8 @@ for interval in IntervalTimer(10):
     # turn the stepper
     if result == 0:
         print("Background")
-        # vid.release()
-        continue
+        vid.release()
+        # continue
     elif result == 1:
         print("Recycle waste")
         motor.enable(True)
