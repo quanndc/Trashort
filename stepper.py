@@ -1,10 +1,14 @@
 # import libs
-from rpi_python_drv8825.stepper import StepperMotor # type: ignore
+from rpi_python_drv8825.stepper import StepperMotor  # type: ignore
 from interval_timer import IntervalTimer
-from tflite_runtime.interpreter import Interpreter # type: ignore
+from tflite_runtime.interpreter import Interpreter  # type: ignore
 import numpy as np
 import cv2 as cv
+import requests
+import time
 import os
+
+url = "http://172.16.0.153:1323/"
 
 # GPIO setup
 enable_pin = 4
@@ -15,7 +19,9 @@ mode_pins = (21, 22, 27)
 step_type = "1/32"
 fullstep_delay = 0.005
 # create motor object
-motor = StepperMotor(enable_pin, step_pin, dir_pin, mode_pins, step_type, fullstep_delay)
+motor = StepperMotor(
+    enable_pin, step_pin, dir_pin, mode_pins, step_type, fullstep_delay
+)
 
 # define a video capture object
 # vid = cv2.VideoCapture(0)
@@ -30,6 +36,7 @@ label_path = project_folder + "labels.txt"
 def load_labels(path):  # Read the labels from the text file as a Python list.
     with open(path, "r") as f:
         return [line.strip() for i, line in enumerate(f.readlines())]
+
 
 def set_input_tensor(interpreter, image):
     tensor_index = interpreter.get_input_details()[0]["index"]
@@ -51,6 +58,10 @@ def classify_image(interpreter, image, top_k=1):
     return [(i, output[i]) for i in ordered[:top_k]][0]
 
 
+def get_miliseconds():
+    return int(time.time() * 1000)
+
+
 model = Interpreter(model_path)
 model.allocate_tensors()
 _, height, width, _ = model.get_input_details()[0]["shape"]
@@ -63,6 +74,10 @@ for interval in IntervalTimer(10):
     # capture image
     # resize the frame to 224x224
     frame = cv.resize(frame, (224, 224), interpolation=cv.INTER_AREA)
+    # get current time
+    current_time = get_miliseconds()
+    # save the image
+    cv.imwrite("/home/trashort/Pictures/" + str(current_time) + ".jpg", frame)
     # Make the image a numpy array and reshape it to the models input shape.
     image = np.asarray(frame, dtype=np.float32).reshape(1, 224, 224, 3)
     # Normalize the image array
@@ -85,6 +100,11 @@ for interval in IntervalTimer(10):
         motor.run(200 * 8, True)
         # enables stepper driver
         motor.enable(False)
+        with open("/home/trashort/Pictures/" + str(current_time) + ".jpg", "rb") as f:
+            img_data = f.read()
+            img_name = str(current_time) + ".jpg"
+        r = requests.post(url + "uploadRecycle", files={"file": img_data})
+        os.remove("/home/trashort/Pictures/" + str(current_time) + ".jpg")
         vid.release()
     else:
         print("Organic waste")
@@ -93,4 +113,9 @@ for interval in IntervalTimer(10):
         motor.run(200 * 8, False)
         # enables stepper driver
         motor.enable(False)
+        with open("/home/trashort/Pictures/" + str(current_time) + ".jpg", "rb") as f:
+            img_data = f.read()
+            img_name = str(current_time) + ".jpg"
+        r = requests.post(url + "uploadOrganic", files={"file": img_data})
+        os.remove("/home/trashort/Pictures/" + str(current_time) + ".jpg")
         vid.release()
