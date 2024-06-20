@@ -91,6 +91,7 @@ for interval in IntervalTimer(10):
     # turn the stepper
     if result == 0:
         print("Background")
+        os.remove("/home/trashort/Pictures/" + str(current_time) + ".jpg")
         vid.release()
         # continue
     elif result == 1:
