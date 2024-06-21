@@ -106,6 +106,7 @@ for interval in IntervalTimer(10):
             img_name = str(current_time) + ".jpg"
         r = requests.post(url + "uploadRecycle", files={"file": img_data})
         if r.status_code == 201:
+            print("upload recycle waste")
             # turn off the camera
             os.remove("/home/trashort/Pictures/" + str(current_time) + ".jpg")
             vid.release()
@@ -121,6 +122,7 @@ for interval in IntervalTimer(10):
             img_name = str(current_time) + ".jpg"
         r = requests.post(url + "uploadOrganic", files={"file": img_data})
         if r.status_code == 201:
+            print("upload organic waste")
             # turn off the camera
             os.remove("/home/trashort/Pictures/" + str(current_time) + ".jpg")
             vid.release()
