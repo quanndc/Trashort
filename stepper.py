@@ -8,7 +8,7 @@ import requests
 import time
 import os
 
-url = "http://172.16.0.153:1323/"
+url = "http://10.106.21.113:1323/"
 
 # GPIO setup
 enable_pin = 4
